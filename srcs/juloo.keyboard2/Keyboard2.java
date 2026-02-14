@@ -337,16 +337,19 @@ public class Keyboard2 extends InputMethodService
     _keyboardView.reset();
   }
 
-  /** Handle hardware keyboard language switch key. Cycles through configured
-      layouts (e.g. Korean ↔ English). */
+  /** Handle hardware keyboard language switch. Responds to the dedicated
+      language key and Ctrl+Space. */
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event)
   {
-    if (keyCode == KeyEvent.KEYCODE_LANGUAGE_SWITCH
-        && event.getRepeatCount() == 0)
+    if (event.getRepeatCount() == 0)
     {
-      incrTextLayout(1);
-      return true;
+      if (keyCode == KeyEvent.KEYCODE_LANGUAGE_SWITCH
+          || (keyCode == KeyEvent.KEYCODE_SPACE && event.isCtrlPressed()))
+      {
+        incrTextLayout(1);
+        return true;
+      }
     }
     return super.onKeyDown(keyCode, event);
   }
