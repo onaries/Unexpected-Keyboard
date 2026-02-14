@@ -337,6 +337,20 @@ public class Keyboard2 extends InputMethodService
     _keyboardView.reset();
   }
 
+  /** Handle hardware keyboard language switch key. Cycles through configured
+      layouts (e.g. Korean ↔ English). */
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event)
+  {
+    if (keyCode == KeyEvent.KEYCODE_LANGUAGE_SWITCH
+        && event.getRepeatCount() == 0)
+    {
+      incrTextLayout(1);
+      return true;
+    }
+    return super.onKeyDown(keyCode, event);
+  }
+
   @Override
   public void onSharedPreferenceChanged(SharedPreferences _prefs, String _key)
   {
