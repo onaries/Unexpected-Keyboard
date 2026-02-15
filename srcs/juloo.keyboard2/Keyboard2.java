@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -337,11 +338,11 @@ public class Keyboard2 extends InputMethodService
     _keyboardView.reset();
   }
 
-  /** Handle hardware keyboard language switch. Responds to the dedicated
-      language key and Ctrl+Space. */
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event)
   {
+    Logs.debug("onKeyDown: keyCode=" + keyCode + " meta=0x"
+        + Integer.toHexString(event.getMetaState()));
     if (event.getRepeatCount() == 0)
     {
       if (keyCode == KeyEvent.KEYCODE_LANGUAGE_SWITCH
